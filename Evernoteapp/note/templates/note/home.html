@@ -1,0 +1,38 @@
+{% extends 'note/base.html' %}
+{% block content %}
+
+{% if all_item %}
+  <div class="alert alert-light shadow-sm mt-4" role="alert">
+    <h5 class="mb-3">📋 Your Notes</h5>
+    <div class="table-responsive">
+      <table class="table table-hover align-middle border rounded">
+        <thead class="table-primary">
+          <tr>
+            <th scope="col">Note</th>
+            <th scope="col" class="text-center">Completed</th>
+            <th scope="col" class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for things in all_item %}
+          <tr>
+            <td>{{ things.text }}</td>
+            <td class="text-center">
+              {% if things.complete %}
+                ✅
+              {% else %}
+                ❌
+              {% endif %}
+            </td>
+            <td class="text-center">
+              <a href="{% url 'delete' things.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endif %}
+
+{% endblock content %}

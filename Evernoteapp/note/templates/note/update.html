@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if all_item %}
+  <div class="alert alert-warning alert-dismissible fade show mt-4 shadow-sm" role="alert">
+    <strong>📝 Notes List</strong>
+    <div class="table-responsive mt-3">
+      <table class="table table-bordered table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Note</th>
+            <th class="text-center">Completed</th>
+            <th class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for things in all_item %}
+          <tr>
+            <td>{{ things.text }}</td>
+            <td class="text-center">
+              {% if things.complete %}
+                ✅
+              {% else %}
+                ❌
+              {% endif %}
+            </td>
+            <td class="text-center">
+              <a href="{% url 'update' things.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% else %}
+  <div class="alert alert-info mt-4 text-center">
+    No notes found. Start by adding one!
+  </div>
+{% endif %}
+
+{% endblock content %}
